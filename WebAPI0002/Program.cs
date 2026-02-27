@@ -105,7 +105,7 @@ app.Run();
 /// </summary>
 /// <param name="Date"></param>
 /// <param name="TemperatureC"></param>
-/// <param name="Summary"></param>
+/// <param name="Summary">A brief summary of the weather</param>
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + TemperatureC / 5 * 9;
