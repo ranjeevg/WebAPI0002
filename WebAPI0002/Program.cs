@@ -63,7 +63,15 @@ string[] cities =
     "Madrid", 
     "Rome", 
     "Bern", 
-    "Trondheim"
+    "Trondheim",
+    "Calgary",
+    "Edmonton",
+    "Kamloops",
+    "Montreal",
+    "Hyderabad",
+    "Udupi", 
+    "Havana",
+    "New York City"
 ];
 
 // the default 'get' API that came with the template
@@ -107,7 +115,8 @@ app.MapPost("/mostCommonLanguageInCityList", () =>
             .DistinctBy(datum => datum.City)
             .ToArray();
         
-        return languagesMostCommonlySpokenInCity;
+        // returning a response object, with the distinct cities and a summary line.
+        return new MostCommonLanguageResponse(languagesMostCommonlySpokenInCity);
     })
     .WithName("PostMostCommonLanguageInCityList");
 
@@ -129,9 +138,25 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 
 /// <summary>
 /// A record to model date from the 'Most Commonly Spoken Language in City' POST API response.
+/// <br /><br />
+/// (An IEnumerable of these goes in to the
+/// <see cref="MostCommonLanguageResponse">Most Common Language Response</see>
+/// record, which is the response for the POST API.
 /// </summary>
 /// <param name="City"></param>
 /// <param name="MostCommonLanguage"></param>
 record MostCommonLanguageInCity(string City, string MostCommonLanguage)
 {
+}
+
+/// <summary>
+/// The response model for the POST API.
+/// </summary>
+/// <param name="CityData"></param>
+record MostCommonLanguageResponse(IEnumerable<MostCommonLanguageInCity> CityData)
+{
+    /// <summary>
+    /// A count for the total number of cities returned by the API.
+    /// </summary>
+    public int TotalCitiesReturned => CityData.Count();
 }
