@@ -109,7 +109,7 @@ app.MapPost("/mostCommonLanguageInCityList", () =>
         
         return languagesMostCommonlySpokenInCity;
     })
-    .WithName("MostCommonLanguageInCityList");
+    .WithName("PostMostCommonLanguageInCityList");
 
 app.Run();
 
