@@ -88,7 +88,7 @@ app.MapGet("/weatherforecast", () =>
     })
     .WithName("GetWeatherForecast");
 
-// A sample POST API call, modelled after the sample 'get' API above
+// A sample POST API call, modeled after the sample 'get' API above
 app.MapPost("/mostCommonLanguageInCityList", () =>
     {
         // declaring an array of 'most connon language spoken in the city' results to be returned
