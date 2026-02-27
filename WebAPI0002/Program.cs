@@ -49,7 +49,12 @@ string[] languages =
     "Swedish", 
     "Finnish", 
     "Igbo",
-    "Tagalog"
+    "Tagalog",
+    "Dene",
+    "Malayalam",
+    "Russian",
+    "Ukrainian",
+    "Sanskrit"
 ];
 
 // a list of dummy values for cities
@@ -71,7 +76,8 @@ string[] cities =
     "Hyderabad",
     "Udupi", 
     "Havana",
-    "New York City"
+    "New York City",
+    "Varanasi"
 ];
 
 // the default 'get' API that came with the template
