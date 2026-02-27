@@ -113,6 +113,8 @@ app.MapPost("/mostCommonLanguageInCityList", () =>
         // removing duplicates by city
         languagesMostCommonlySpokenInCity = languagesMostCommonlySpokenInCity
             .DistinctBy(datum => datum.City)
+            // order by city name
+            .OrderBy(datum => datum.City)
             .ToArray();
         
         // returning a response object, with the distinct cities and a summary line.
@@ -158,5 +160,5 @@ record MostCommonLanguageResponse(IEnumerable<MostCommonLanguageInCity> CityData
     /// <summary>
     /// A count for the total number of cities returned by the API.
     /// </summary>
-    public int TotalCitiesReturned => CityData.Count();
+    public int CitiesReturnedCount => CityData.Count();
 }
