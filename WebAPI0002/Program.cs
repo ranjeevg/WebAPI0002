@@ -70,13 +70,14 @@ string[] cities =
 app.MapGet("/weatherforecast", () =>
     {
         var forecast = Enumerable.Range(1, 10).Select(index =>
-                new WeatherForecast
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-            .ToArray();
+            new WeatherForecast
+            (
+                DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                Random.Shared.Next(-20, 55),
+                summaries[Random.Shared.Next(summaries.Length)]
+            ))
+        .ToArray();
+        
         return forecast;
     })
     .WithName("GetWeatherForecast");
@@ -94,6 +95,11 @@ app.MapPost("/mostCommonLanguageInCityList", () =>
             ))
             .ToArray();
         
+        // removing duplicates by city
+        languagesMostCommonlySpokenInCity = languagesMostCommonlySpokenInCity
+            .DistinctBy(datum => datum.City)
+            .ToArray();
+        
         return languagesMostCommonlySpokenInCity;
     })
     .WithName("MostCommonLanguageInCityList");
@@ -108,6 +114,9 @@ app.Run();
 /// <param name="Summary">A brief summary of the weather</param>
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
+    /// <summary>
+    /// This property is auto-generated for the API response, not for use in the program itself.
+    /// </summary>
     public int TemperatureF => 32 + TemperatureC / 5 * 9;
 }
 
