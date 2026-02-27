@@ -78,16 +78,23 @@ app.MapGet("/weatherforecast", () =>
             ))
         .ToArray();
         
+        // removing duplicate dates
+        // (redundant in this method, present as an example only)
+        forecast = forecast
+            .DistinctBy(datum => datum.Date)
+            .ToArray();
+        
         return forecast;
     })
     .WithName("GetWeatherForecast");
 
+// A sample POST API call, modelled after the sample 'get' API above
 app.MapPost("/mostCommonLanguageInCityList", () =>
     {
         // declaring an array of 'most connon language spoken in the city' results to be returned
         var languagesMostCommonlySpokenInCity = 
             // did not know about this feature for enumerating over a set index
-            Enumerable.Range(1, 6)
+            Enumerable.Range(1, 10)
             .Select(index => new MostCommonLanguageInCity
             (
                 cities[Random.Shared.Next(cities.Length)],
@@ -107,7 +114,7 @@ app.MapPost("/mostCommonLanguageInCityList", () =>
 app.Run();
 
 /// <summary>
-/// A record to model the 'Get Weather Forecast' GET API response.
+/// A record to model data from the 'Get Weather Forecast' GET API response.
 /// </summary>
 /// <param name="Date"></param>
 /// <param name="TemperatureC"></param>
@@ -121,7 +128,7 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 }
 
 /// <summary>
-/// A record to model the 'Most Commonly Spoken Language in Citu' POST API response.
+/// A record to model date from the 'Most Commonly Spoken Language in City' POST API response.
 /// </summary>
 /// <param name="City"></param>
 /// <param name="MostCommonLanguage"></param>
