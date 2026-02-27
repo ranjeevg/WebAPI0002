@@ -80,6 +80,8 @@ string[] cities =
     "Varanasi"
 ];
 
+#region API methods
+
 // the default 'get' API that came with the template
 app.MapGet("/weatherforecast", () =>
     {
@@ -127,6 +129,8 @@ app.MapPost("/mostCommonLanguageInCityList", () =>
         return new MostCommonLanguageResponse(languagesMostCommonlySpokenInCity);
     })
     .WithName("PostMostCommonLanguageInCityList");
+
+#endregion
 
 app.Run();
 
