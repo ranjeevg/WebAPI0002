@@ -141,7 +141,7 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 /// <br /><br />
 /// (An IEnumerable of these goes in to the
 /// <see cref="MostCommonLanguageResponse">Most Common Language Response</see>
-/// record, which is the response for the POST API.
+/// record, which is the response for the POST API.)
 /// </summary>
 /// <param name="City"></param>
 /// <param name="MostCommonLanguage"></param>
