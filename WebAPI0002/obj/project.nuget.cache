@@ -1,12 +1,27 @@
 {
   "version": 2,
-  "dgSpecHash": "WQbERuBhhYo=",
+  "dgSpecHash": "PyuBQWce/cY=",
   "success": true,
   "projectFilePath": "/home/ranjeevji/Documents/GitHubLocals/WebAPITesting0002/WebAPI0002/WebAPI0002/WebAPI0002.csproj",
   "expectedPackageFiles": [
+    "/home/ranjeevji/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
+    "/home/ranjeevji/.nuget/packages/efcore.bulkextensions.core/10.0.1/efcore.bulkextensions.core.10.0.1.nupkg.sha512",
+    "/home/ranjeevji/.nuget/packages/efcore.bulkextensions.postgresql/10.0.1/efcore.bulkextensions.postgresql.10.0.1.nupkg.sha512",
+    "/home/ranjeevji/.nuget/packages/efcore.genericservices/10.0.0/efcore.genericservices.10.0.0.nupkg.sha512",
+    "/home/ranjeevji/.nuget/packages/genericservices.statusgeneric/1.2.0/genericservices.statusgeneric.1.2.0.nupkg.sha512",
+    "/home/ranjeevji/.nuget/packages/medalliontopologicalsort/1.0.0/medalliontopologicalsort.1.0.0.nupkg.sha512",
+    "/home/ranjeevji/.nuget/packages/microsoft.aspnetcore.jsonpatch/10.0.0/microsoft.aspnetcore.jsonpatch.10.0.0.nupkg.sha512",
     "/home/ranjeevji/.nuget/packages/microsoft.aspnetcore.openapi/10.0.3/microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512",
+    "/home/ranjeevji/.nuget/packages/microsoft.entityframeworkcore/10.0.3/microsoft.entityframeworkcore.10.0.3.nupkg.sha512",
+    "/home/ranjeevji/.nuget/packages/microsoft.entityframeworkcore.abstractions/10.0.3/microsoft.entityframeworkcore.abstractions.10.0.3.nupkg.sha512",
+    "/home/ranjeevji/.nuget/packages/microsoft.entityframeworkcore.analyzers/10.0.3/microsoft.entityframeworkcore.analyzers.10.0.3.nupkg.sha512",
+    "/home/ranjeevji/.nuget/packages/microsoft.entityframeworkcore.relational/10.0.3/microsoft.entityframeworkcore.relational.10.0.3.nupkg.sha512",
     "/home/ranjeevji/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512",
-    "/home/ranjeevji/.nuget/packages/system.text.json/8.0.5/system.text.json.8.0.5.nupkg.sha512"
+    "/home/ranjeevji/.nuget/packages/nettopologysuite/2.6.0/nettopologysuite.2.6.0.nupkg.sha512",
+    "/home/ranjeevji/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
+    "/home/ranjeevji/.nuget/packages/npgsql/10.0.0/npgsql.10.0.0.nupkg.sha512",
+    "/home/ranjeevji/.nuget/packages/npgsql.entityframeworkcore.postgresql/10.0.0/npgsql.entityframeworkcore.postgresql.10.0.0.nupkg.sha512",
+    "/home/ranjeevji/.nuget/packages/system.componentmodel.annotations/4.6.0/system.componentmodel.annotations.4.6.0.nupkg.sha512"
   ],
   "logs": []
 }
