@@ -1,4 +1,6 @@
 using WebApi0002.Extensions;
+using WebApi0002.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +31,7 @@ string[] summaries =
     "Hot", 
     "Sweltering", 
     "Scorching", 
-    "Icarean", 
+    "Boiling", 
     "Judeccan"
 ];
 
