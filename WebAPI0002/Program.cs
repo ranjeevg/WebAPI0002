@@ -1,3 +1,5 @@
+using WebApi0002.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -85,7 +87,7 @@ string[] cities =
 // the default 'get' API that came with the template
 app.MapGet("/weatherforecast", () =>
     {
-        var forecast = Enumerable.Range(1, 10).Select(index =>
+        var forecast = Enumerable.Range(1, 100).Select(index =>
             new WeatherForecast
             (
                 DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -110,8 +112,8 @@ app.MapPost("/mostCommonLanguageInCityList", () =>
         // declaring an array of 'most connon language spoken in the city' results to be returned
         var languagesMostCommonlySpokenInCity = 
             // did not know about this feature for enumerating over a set index
-            Enumerable.Range(1, 10)
-            .Select(index => new MostCommonLanguageInCity
+            Enumerable.Range(1, 100)
+            .Select(_ => new MostCommonLanguageInCity
             (
                 cities[Random.Shared.Next(cities.Length)],
                 languages[Random.Shared.Next(languages.Length)]
@@ -121,12 +123,14 @@ app.MapPost("/mostCommonLanguageInCityList", () =>
         // removing duplicates by city
         languagesMostCommonlySpokenInCity = languagesMostCommonlySpokenInCity
             .DistinctBy(datum => datum.City)
-            // order by city name
-            .OrderBy(datum => datum.City)
             .ToArray();
         
         // returning a response object, with the distinct cities and a summary line.
-        return new MostCommonLanguageResponse(languagesMostCommonlySpokenInCity);
+        var respRaw = new MostCommonLanguageResponse(languagesMostCommonlySpokenInCity);
+
+        var response = respRaw.OrderByCityNameAlphabetically();
+
+        return response;
     })
     .WithName("PostMostCommonLanguageInCityList");
 
@@ -157,15 +161,15 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 /// </summary>
 /// <param name="City"></param>
 /// <param name="MostCommonLanguage"></param>
-record MostCommonLanguageInCity(string City, string MostCommonLanguage)
+public record MostCommonLanguageInCity(string City, string MostCommonLanguage)
 {
 }
 
 /// <summary>
 /// The response model for the POST API.
 /// </summary>
-/// <param name="CityData"></param>
-record MostCommonLanguageResponse(IEnumerable<MostCommonLanguageInCity> CityData)
+/// <param name="CityData">An IEnumerable of <see cref="MostCommonLanguageInCity"/> objects.</param>
+public record MostCommonLanguageResponse(IEnumerable<MostCommonLanguageInCity> CityData)
 {
     /// <summary>
     /// A count for the total number of cities returned by the API.
