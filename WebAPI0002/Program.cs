@@ -1,4 +1,5 @@
 using WebApi0002.Extensions;
+using WebApi0002.Helpers_and_Enums;
 using WebAPI0002.Helpers_and_Enums;
 using WebApi0002.Models;
 using WebApi0002.Services;
@@ -11,83 +12,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 // custom-defined service scoped in - with no helper class needed.
-builder.Services.AddScoped<Services>();
+builder.Services.AddScoped<HomemadeService>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
-{
     app.MapOpenApi();
-}
 
 app.UseHttpsRedirection();
-
-// Local weather condition summaries
-string[] summaries =
-[
-    "Freezing", 
-    "Bracing", 
-    "Chilly", 
-    "Cool", 
-    "Mild", 
-    "Warm", 
-    "Balmy", 
-    "Hot", 
-    "Sweltering", 
-    "Scorching", 
-    "Boiling", 
-    "Judeccan"
-];
-
-// dummy values for languages
-string[] languages =
-[   
-    "English", 
-    "Tamil", 
-    "Hindi", 
-    "French", 
-    "Spanish", 
-    "Mandarin", 
-    "Japanese", 
-    "Punjabi", 
-    "Urdu", 
-    "Sinhala", 
-    "Danish", 
-    "Norwegian", 
-    "Swedish", 
-    "Finnish", 
-    "Igbo",
-    "Tagalog",
-    "Dene",
-    "Malayalam",
-    "Russian",
-    "Ukrainian",
-    "Sanskrit"
-];
-
-// a list of dummy values for cities
-string[] cities =
-[
-    "Vancouver", 
-    "Surrey", 
-    "Toronto", 
-    "Bangalore", 
-    "Delhi", 
-    "Madrid", 
-    "Rome", 
-    "Bern", 
-    "Trondheim",
-    "Calgary",
-    "Edmonton",
-    "Kamloops",
-    "Montreal",
-    "Hyderabad",
-    "Udupi", 
-    "Havana",
-    "New York City",
-    "Varanasi"
-];
 
 #region API methods
 
@@ -99,7 +32,7 @@ app.MapGet("/weatherforecast", () =>
             (
                 DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 Random.Shared.Next(-20, 55),
-                summaries[Random.Shared.Next(summaries.Length)]
+                AppConstants.ApiLists.TemperatureDescriptions[Random.Shared.Next(AppConstants.ApiLists.TemperatureDescriptions.Length)]
             ))
         .ToArray();
         
@@ -113,17 +46,17 @@ app.MapGet("/weatherforecast", () =>
     })
     .WithName("GetWeatherForecast");
 
-// A sample POST API call, modeled after the sample 'get' API above
-app.MapPost("/mostCommonLanguageInCityList", () =>
+// A sample POST API call, modelled after the sample 'get' API above
+app.MapPost("/mostCommonLanguageInCity", () =>
     {
         // declaring an array of 'most connon language spoken in the city' results to be returned
         var languagesMostCommonlySpokenInCity = 
             // did not know about this feature for enumerating over a set index
-            Enumerable.Range(1, 100)
+            Enumerable.Range(1, 250)
             .Select(_ => new MostCommonLanguageInCity
             (
-                cities[Random.Shared.Next(cities.Length)],
-                languages[Random.Shared.Next(languages.Length)]
+                AppConstants.ApiLists.Cities[Random.Shared.Next(AppConstants.ApiLists.Cities.Length)],
+                AppConstants.ApiLists.Languages[Random.Shared.Next(AppConstants.ApiLists.Languages.Length)]
             ))
             .ToArray();
         
@@ -139,7 +72,7 @@ app.MapPost("/mostCommonLanguageInCityList", () =>
 
         return response;
     })
-    .WithName("PostMostCommonLanguageInCityList");
+    .WithName("PostMostCommonLanguageInCity");
 
 #endregion
 
