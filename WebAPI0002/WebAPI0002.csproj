@@ -14,4 +14,31 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="bin\Debug\net10.0\appsettings.Development.json" />
+      <Content Include="bin\Debug\net10.0\appsettings.json" />
+      <Content Include="bin\Debug\net10.0\AutoMapper.dll" />
+      <Content Include="bin\Debug\net10.0\EFCore.BulkExtensions.Core.dll" />
+      <Content Include="bin\Debug\net10.0\EFCore.BulkExtensions.PostgreSql.dll" />
+      <Content Include="bin\Debug\net10.0\GenericServices.dll" />
+      <Content Include="bin\Debug\net10.0\MedallionTopologicalSort.dll" />
+      <Content Include="bin\Debug\net10.0\Microsoft.AspNetCore.JsonPatch.dll" />
+      <Content Include="bin\Debug\net10.0\Microsoft.AspNetCore.OpenApi.dll" />
+      <Content Include="bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Abstractions.dll" />
+      <Content Include="bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll" />
+      <Content Include="bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Relational.dll" />
+      <Content Include="bin\Debug\net10.0\Microsoft.OpenApi.dll" />
+      <Content Include="bin\Debug\net10.0\NetTopologySuite.dll" />
+      <Content Include="bin\Debug\net10.0\Newtonsoft.Json.dll" />
+      <Content Include="bin\Debug\net10.0\Npgsql.dll" />
+      <Content Include="bin\Debug\net10.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll" />
+      <Content Include="bin\Debug\net10.0\StatusGeneric.dll" />
+      <Content Include="bin\Debug\net10.0\WebAPI0002" />
+      <Content Include="bin\Debug\net10.0\WebAPI0002.deps.json" />
+      <Content Include="bin\Debug\net10.0\WebAPI0002.dll" />
+      <Content Include="bin\Debug\net10.0\WebAPI0002.pdb" />
+      <Content Include="bin\Debug\net10.0\WebAPI0002.runtimeconfig.json" />
+      <Content Include="bin\Debug\net10.0\WebAPI0002.staticwebassets.endpoints.json" />
+    </ItemGroup>
+
 </Project>

@@ -16,5 +16,5 @@
 /WebAPI0002/bin/Debug/net10.0/WebAPI0002.dll
 /WebAPI0002/bin/Debug/net10.0/WebAPI0002.pdb
 /WebAPI0002/bin/Debug/net10.0/WebAPI0002.runtimeconfig.json
-/WebAPI0002/bin/Debug/**.*
-/WebAPI0002/obj/**.*
+/WebAPI0002/bin/Debug
+/WebAPI0002/obj
