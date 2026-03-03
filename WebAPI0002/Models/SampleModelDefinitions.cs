@@ -31,10 +31,21 @@ public record MostCommonLanguageInCity(string City, string MostCommonLanguage)
 /// The response model for the POST API.
 /// </summary>
 /// <param name="CityData">An IEnumerable of <see cref="MostCommonLanguageInCity"/> objects.</param>
-public record MostCommonLanguageResponse(IEnumerable<MostCommonLanguageInCity> CityData)
+public record MostCommonLanguageResponse(IEnumerable<MostCommonLanguageInCity> cityData)
 {
     /// <summary>
     /// A count for the total number of cities returned by the API.
     /// </summary>
-    public int CitiesReturnedCount => CityData.Count();
+    public int CitiesReturnedCount => cityData.Count();
+    
+    /// <summary>
+    /// Sorts the results of a
+    /// <see cref="MostCommonLanguageResponse"/>
+    /// by city name in alphabetical order.
+    /// </summary>
+    /// <param name="source"></param>
+    /// <returns></returns>
+    public MostCommonLanguageResponse OrderByCityNameAlphabetically(MostCommonLanguageResponse source) => 
+        new MostCommonLanguageResponse(cityData.OrderBy(datum => datum.City));
 }
+

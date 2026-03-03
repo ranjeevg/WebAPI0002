@@ -1,6 +1,8 @@
 using WebApi0002.Extensions;
 using WebAPI0002.Helpers_and_Enums;
-using WebAPI0002.
+using WebApi0002.Models;
+using WebApi0002.Services;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+// custom-defined service scoped in - with no helper class needed.
+builder.Services.AddScoped<Services>();
 
 var app = builder.Build();
 
@@ -131,7 +135,7 @@ app.MapPost("/mostCommonLanguageInCityList", () =>
         // returning a response object, with the distinct cities and a summary line.
         var respRaw = new MostCommonLanguageResponse(languagesMostCommonlySpokenInCity);
 
-        var response = respRaw.OrderByCityNameAlphabetically();
+        var response = respRaw.OrderByCityNameAlphabetically(respRaw);
 
         return response;
     })
