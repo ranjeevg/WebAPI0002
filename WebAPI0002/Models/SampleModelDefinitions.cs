@@ -66,7 +66,7 @@ public record WeatherInCityResponse(WeatherInCity[] WeatherData)
     /// <summary>
     /// The number of distinct dates present in the response model.
     /// </summary>
-    public int totalDatesRepresented => WeatherData
+    public int TotalDatesCounted => WeatherData
         .Select(datum => datum.WeatherDatumDate)
         .Distinct()
         .Count();
@@ -74,7 +74,7 @@ public record WeatherInCityResponse(WeatherInCity[] WeatherData)
     /// <summary>
     /// How many cities were counted in the response model?
     /// </summary>
-    public int totalCitiesCounted = WeatherData
+    public int TotalCitiesCounted => WeatherData
         .Select(datum => datum.CityName)
         .Distinct()
         .Count();
