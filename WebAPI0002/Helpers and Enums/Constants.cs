@@ -81,8 +81,14 @@ public static class AppConstants
         ];
     }
     
+    /// <summary>
+    /// Miscellaneous values (table names and the like)
+    /// </summary>
     public static class MiscConstants
     {
-        
+        /// <summary>
+        /// Because d'uh.
+        /// </summary>
+        public static int TheAnswerToLifeTheUniverseAndEverything => 42;
     }
 }
