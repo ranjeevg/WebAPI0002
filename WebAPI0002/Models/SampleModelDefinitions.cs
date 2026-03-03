@@ -31,12 +31,12 @@ public record MostCommonLanguageInCity(string City, string MostCommonLanguage)
 /// The response model for the POST API.
 /// </summary>
 /// <param name="CityData">An IEnumerable of <see cref="MostCommonLanguageInCity"/> objects.</param>
-public record MostCommonLanguageResponse(IEnumerable<MostCommonLanguageInCity> cityData)
+public record MostCommonLanguageResponse(IEnumerable<MostCommonLanguageInCity> CityData)
 {
     /// <summary>
     /// A count for the total number of cities returned by the API.
     /// </summary>
-    public int CitiesReturnedCount => cityData.Count();
+    public int CitiesReturnedCount => CityData.Count();
     
     /// <summary>
     /// Sorts the results of a
@@ -46,6 +46,37 @@ public record MostCommonLanguageResponse(IEnumerable<MostCommonLanguageInCity> c
     /// <param name="source"></param>
     /// <returns></returns>
     public MostCommonLanguageResponse OrderByCityNameAlphabetically(MostCommonLanguageResponse source) => 
-        new MostCommonLanguageResponse(cityData.OrderBy(datum => datum.City));
+        new MostCommonLanguageResponse(CityData.OrderBy(datum => datum.City));
+}
+
+public record WeatherInCity
+{
+    public DateOnly WeatherDatumDate { get; init; } 
+        = new DateOnly(year: 1900, month: 01, day: 1);
+    public string CityName { get; init; } 
+        = "(not available)";
+    public string WeatherDescription { get; init; } 
+        = "(not available)";
+    public string MostCommomLanguageSpokenInCity { get; init; } 
+        = "(not available)";
+}
+
+public record WeatherInCityResponse(WeatherInCity[] WeatherData)
+{
+    /// <summary>
+    /// The number of distinct dates present in the response model.
+    /// </summary>
+    public int totalDatesRepresented => WeatherData
+        .Select(datum => datum.WeatherDatumDate)
+        .Distinct()
+        .Count();
+
+    /// <summary>
+    /// How many cities were counted in the response model?
+    /// </summary>
+    public int totalCitiesCounted = WeatherData
+        .Select(datum => datum.CityName)
+        .Distinct()
+        .Count();
 }
 

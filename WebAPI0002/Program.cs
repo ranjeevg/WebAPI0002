@@ -1,6 +1,8 @@
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.Extensions.Primitives;
 using WebApi0002.Extensions;
 using WebApi0002.Helpers_and_Enums;
-using WebAPI0002.Helpers_and_Enums;
 using WebApi0002.Models;
 using WebApi0002.Services;
 
@@ -11,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
 // custom-defined service scoped in - with no helper class needed.
 builder.Services.AddScoped<HomemadeService>();
 
@@ -25,9 +28,9 @@ app.UseHttpsRedirection();
 #region API methods
 
 // the default 'get' API that came with the template
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/weatherForecast", () =>
     {
-        var forecast = Enumerable.Range(1, 100).Select(index =>
+        var forecast = Enumerable.Range(1, AppConstants.MiscConstants.TheAnswerToLifeTheUniverseAndEverything).Select(index =>
             new WeatherForecast
             (
                 DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -73,6 +76,36 @@ app.MapPost("/mostCommonLanguageInCity", () =>
         return response;
     })
     .WithName("PostMostCommonLanguageInCity");
+
+// a sample GET method predicting the 'current weather' for a predetermined list of cities.
+app.MapGet("/getWeatherForecastByCity", () =>
+    {
+        var cityList = AppConstants.ApiLists.Cities;
+        var weatherDescriptions = AppConstants.ApiLists.TemperatureDescriptions;
+        var languagesList = AppConstants.ApiLists.Languages;
+        
+        var rawResponse = 
+            Enumerable.Range(1, AppConstants.MiscConstants.TheAnswerToLifeTheUniverseAndEverything)
+                .Select(_ => new WeatherInCity 
+                {
+                    WeatherDatumDate = DateTime.Today
+                        .AddDays(Random.Shared.Next(-2000, 5500))
+                        // custom extension method being called here
+                        .ToDateOnly(),
+                    WeatherDescription = weatherDescriptions[Random.Shared.Next(weatherDescriptions.Length)],
+                    CityName = cityList[Random.Shared.Next(cityList.Length)],
+                    MostCommomLanguageSpokenInCity = languagesList[Random.Shared.Next(languagesList.Length)]
+                })
+                .DistinctBy(datum => datum.WeatherDatumDate)
+                .OrderBy(datum => datum.WeatherDatumDate)
+                .ThenBy(datum => datum.CityName, StringComparer.OrdinalIgnoreCase)
+                .ToArray();
+
+        var response = new WeatherInCityResponse(rawResponse);
+
+        return response;
+    })
+    .WithName("GetMostCommonLanguageByCity");
 
 #endregion
 
