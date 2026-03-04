@@ -52,7 +52,7 @@ app.MapGet("/weatherForecast", () =>
 // A sample POST API call, modelled after the sample 'get' API above
 app.MapPost("/mostCommonLanguageInCity", () =>
     {
-        // declaring an array of 'most connon language spoken in the city' results to be returned
+        // declaring an array of 'most common language spoken in the city' results to be returned
         var languagesMostCommonlySpokenInCity = 
             // did not know about this feature for enumerating over a set index
             Enumerable.Range(1, 250)
@@ -84,24 +84,29 @@ app.MapGet("/getWeatherForecastByCity", () =>
         var weatherDescriptions = AppConstants.ApiLists.TemperatureDescriptions;
         var languagesList = AppConstants.ApiLists.Languages;
         
-        var rawResponse = 
+        // an arroy of raw data
+        WeatherInCity[] rawResponse = 
             Enumerable.Range(1, AppConstants.MiscConstants.TheAnswerToLifeTheUniverseAndEverything)
-                .Select(_ => new WeatherInCity 
+                // create new objects across the specified numeric range above
+                .Select(_ => new WeatherInCity()
                 {
                     WeatherDatumDate = DateTime.Today
-                        .AddDays(Random.Shared.Next(-2000, 5500))
-                        // custom extension method being called here
+                        .AddDays(Random.Shared.Next(-2, 5))
                         .ToDateOnly(),
                     WeatherDescription = weatherDescriptions[Random.Shared.Next(weatherDescriptions.Length)],
                     CityName = cityList[Random.Shared.Next(cityList.Length)],
-                    MostCommomLanguageSpokenInCity = languagesList[Random.Shared.Next(languagesList.Length)]
+                    MostCommonLanguageSpokenInCity = languagesList[Random.Shared.Next(languagesList.Length)]
                 })
-                .DistinctBy(datum => datum.WeatherDatumDate)
-                .OrderBy(datum => datum.WeatherDatumDate)
-                .ThenBy(datum => datum.CityName, StringComparer.OrdinalIgnoreCase)
+                // treat each city-date combo as a distinct 'key'
+                .DistinctBy(datum => new { datum.CityName, datum.WeatherDatumDate })
                 .ToArray();
-
-        var response = new WeatherInCityResponse(rawResponse);
+        
+        var response = new WeatherInCitySanitizedResponse
+        {
+            WeatherDataOrderedByDate = rawResponse
+                .OrderBy(datum => datum.WeatherDatumDate)
+                .ThenBy(datum => datum.CityName)
+        };
 
         return response;
     })

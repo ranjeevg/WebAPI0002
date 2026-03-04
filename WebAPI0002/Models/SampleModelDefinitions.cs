@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace WebApi0002.Models;
 
 /// <summary>
@@ -52,21 +54,22 @@ public record MostCommonLanguageResponse(IEnumerable<MostCommonLanguageInCity> C
 public record WeatherInCity
 {
     public DateOnly WeatherDatumDate { get; init; } 
+    // default to '1900-01-01' if no value assigned.
         = new DateOnly(year: 1900, month: 01, day: 1);
     public string CityName { get; init; } 
         = "(not available)";
     public string WeatherDescription { get; init; } 
         = "(not available)";
-    public string MostCommomLanguageSpokenInCity { get; init; } 
+    public string MostCommonLanguageSpokenInCity { get; init; } 
         = "(not available)";
 }
 
-public record WeatherInCityResponse(WeatherInCity[] WeatherData)
+public record WeatherInCityResponse(WeatherInCity[] WeatherDataRaw)
 {
     /// <summary>
     /// The number of distinct dates present in the response model.
     /// </summary>
-    public int TotalDatesCounted => WeatherData
+    public int TotalDatesCounted => WeatherDataRaw
         .Select(datum => datum.WeatherDatumDate)
         .Distinct()
         .Count();
@@ -74,9 +77,29 @@ public record WeatherInCityResponse(WeatherInCity[] WeatherData)
     /// <summary>
     /// How many cities were counted in the response model?
     /// </summary>
-    public int TotalCitiesCounted => WeatherData
+    public int TotalCitiesCounted => WeatherDataRaw
         .Select(datum => datum.CityName)
         .Distinct()
         .Count();
+
+    public List<WeatherInCity> WeatherData => WeatherDataRaw
+        .AsEnumerable()
+        .OrderBy(datum => datum.WeatherDatumDate)
+        .ThenBy(datum => datum.CityName, StringComparer.OrdinalIgnoreCase)
+        .ToList();
 }
 
+public record WeatherInCitySanitizedResponse
+{
+    public IEnumerable<WeatherInCity> WeatherDataOrderedByDate { get; init; } = [];
+    
+    public int TotalCitiesCounted =>  WeatherDataOrderedByDate
+        .Select(datum => datum.CityName)
+        .Distinct()
+        .Count();
+
+    public int TotalDatesAccounted => WeatherDataOrderedByDate
+        .Select(datum => datum.WeatherDatumDate)
+        .Distinct()
+        .Count();
+}
