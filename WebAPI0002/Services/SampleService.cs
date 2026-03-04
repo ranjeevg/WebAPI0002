@@ -18,7 +18,7 @@ namespace WebApi0002.Services;
 /// (We aren't in the Ballmer era any longer, praise be.)
 /// </i>
 /// </remarks>
-public class HomemadeService
+public class ActualWeatherAPICallsService
 {
     
 }

@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
 // custom-defined service scoped in - with no helper class needed.
-builder.Services.AddScoped<HomemadeService>();
+builder.Services.AddScoped<ActualWeatherAPICallsService>();
 
 var app = builder.Build();
 
