@@ -44,13 +44,18 @@ public static class DateTimeExtensions
     /// We use that to calculate the date value.)
     /// </i>
     /// </remarks>
-    public static int GetMondayOfWeek(this DateTime dateTime)
+    public static DateTime GetMondayOfWeek(this DateTime dateTime)
     {
-        int MondayOfWeek;
+        int difference;
         
         // Given that same isomrphism, Monday maps over to 1. 
-        
+        // Letting the current day of the week be represented by d, and x represent the number of days to be added / subtracted to get that date,
+        // it follows that
+        // 1 + x = d
+        // => x = d - 1
+        // knowing that d represents the date we're interested in finding the monday of:
+        difference = (int)dateTime.DayOfWeek - 1;
 
-        throw new NotImplementedException("");
+        return dateTime.SubtractDays(difference);
     }
 }
