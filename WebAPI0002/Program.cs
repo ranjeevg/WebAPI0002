@@ -6,8 +6,6 @@ using WebApi0002.Helpers_and_Enums;
 using WebApi0002.Models;
 using WebApi0002.Services;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -84,7 +82,7 @@ app.MapGet("/getWeatherForecastByCity", () =>
         var weatherDescriptions = AppConstants.ApiLists.TemperatureDescriptions;
         var languagesList = AppConstants.ApiLists.Languages;
         
-        // an arroy of raw data
+        // an array of raw data
         WeatherInCity[] rawResponse = 
             Enumerable.Range(1, AppConstants.MiscConstants.TheAnswerToLifeTheUniverseAndEverything)
                 // create new objects across the specified numeric range above

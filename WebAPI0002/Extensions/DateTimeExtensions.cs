@@ -22,7 +22,7 @@ public static class DateTimeExtensions
         => dateTime.AddDays(days * -1);
     
     /// <summary>
-    /// Similar to the .AddDays() method inbuilt for DateTimes on C#.
+    /// Similar to the .AddDays() method inbuilt for DateTimes in C#.
     /// </summary>
     /// <param name="dateTime"></param>
     /// <param name="days"></param>
@@ -48,7 +48,7 @@ public static class DateTimeExtensions
     {
         int difference;
         
-        // Given that same isomrphism, Monday maps over to 1. 
+        // Given that same isomorphism, Monday maps over to 1. 
         // Letting the current day of the week be represented by d, and x represent the number of days to be added / subtracted to get that date,
         // it follows that
         // 1 + x = d
