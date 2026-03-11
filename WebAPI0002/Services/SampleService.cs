@@ -1,6 +1,9 @@
 namespace WebApi0002.Services;
 
 
+///<summary>
+/// A separate API service - to be fleshed out later.
+/// </summary>
 /// <remarks>
 /// DO NOT, I say DO NOT, use a static class as a dependency-injected service.
 /// <br /><br />
