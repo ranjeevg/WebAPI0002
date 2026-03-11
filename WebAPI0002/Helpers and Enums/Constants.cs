@@ -73,6 +73,7 @@ public static class AppConstants
         /// </summary>
         public static string[] TemperatureDescriptions =>
         [
+            "Solar",
             "Hot",
             "Humid",
             "Balmy",
@@ -87,8 +88,9 @@ public static class AppConstants
     public static class MiscConstants
     {
         /// <summary>
-        /// Because d'uh.
+        /// Because of course.
         /// </summary>
-        public static int TheAnswerToLifeTheUniverseAndEverything => 42;
+        public static int TheAnswerToLifeTheUniverseAndEverything 
+            => 42;
     }
 }

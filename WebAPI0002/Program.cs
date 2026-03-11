@@ -1,7 +1,4 @@
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Microsoft.Extensions.Primitives;
-using WebApi0002.Extensions;
+using WebAPI0002.Extensions;
 using WebApi0002.Helpers_and_Enums;
 using WebApi0002.Models;
 using WebApi0002.Services;
@@ -13,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
 // custom-defined service scoped in - with no helper class needed.
-builder.Services.AddScoped<ActualWeatherAPICallsService>();
+builder.Services.AddScoped<ActualWeatherApiCallsService>();
 
 var app = builder.Build();
 
