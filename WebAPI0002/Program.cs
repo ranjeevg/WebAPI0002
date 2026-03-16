@@ -103,8 +103,9 @@ app.MapGet("/getWeatherForecastByCity", () =>
             WeatherDataOrderedByDate = rawResponse
                 .GroupBy(datum => datum.WeatherDatumDate)
                 .SelectMany(datum => datum)
-                .DistinctBy(datum => datum.WeatherDatumDate)
+                .DistinctBy(datum => new {datum.WeatherDatumDate, datum.CityName})
                 .OrderByDescending(datum => datum.WeatherDatumDate)
+                // then by, in ascending order
                 .ThenBy(datum => datum.CityName)
                 .AsEnumerable()
         };
