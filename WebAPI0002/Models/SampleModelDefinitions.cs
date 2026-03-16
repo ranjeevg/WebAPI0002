@@ -64,36 +64,12 @@ public record WeatherInCity
         = "(not available)";
 }
 
-public record WeatherInCityResponse(WeatherInCity[] WeatherDataRaw)
+public record WeatherInCityResponseModel
 {
-    /// <summary>
-    /// The number of distinct dates present in the response model.
-    /// </summary>
-    public int TotalDatesCounted => WeatherDataRaw
-        .Select(datum => datum.WeatherDatumDate)
-        .Distinct()
-        .Count();
+    public IEnumerable<WeatherInCity> WeatherDataOrderedByDate { get; init; }
+        = [];
 
-    /// <summary>
-    /// How many cities were counted in the response model?
-    /// </summary>
-    public int TotalCitiesCounted => WeatherDataRaw
-        .Select(datum => datum.CityName)
-        .Distinct()
-        .Count();
-
-    public List<WeatherInCity> WeatherData => WeatherDataRaw
-        .AsEnumerable()
-        .OrderBy(datum => datum.WeatherDatumDate)
-        .ThenBy(datum => datum.CityName, StringComparer.OrdinalIgnoreCase)
-        .ToList();
-}
-
-public record WeatherInCitySanitizedResponse
-{
-    public IEnumerable<WeatherInCity> WeatherDataOrderedByDate { get; init; } = [];
-    
-    public int TotalCitiesCounted =>  WeatherDataOrderedByDate
+    public int TotalCitiesCounted => WeatherDataOrderedByDate
         .Select(datum => datum.CityName)
         .Distinct()
         .Count();

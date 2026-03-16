@@ -79,8 +79,6 @@ public static class Extensions
     /// <summary>
     /// This might already be an existing functionality, but adding this method for ease of use.
     /// </summary>
-    /// <param name="date"></param>
-    /// <returns></returns>
     public static DateOnly ToDateOnly(this DateTime date)
         => new (date.Year, date.Month, date.Day);
 }

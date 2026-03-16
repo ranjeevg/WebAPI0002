@@ -88,9 +88,9 @@ public static class AppConstants
     public static class MiscConstants
     {
         /// <summary>
-        /// Because of course.
+        /// 42. The answer to Life's Ultimate Question: what is six times nine?
         /// </summary>
-        public static int TheAnswerToLifeTheUniverseAndEverything 
+        public static int TheAnswerToLifeTheUniverseAndEverything
             => 42;
     }
 }

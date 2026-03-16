@@ -86,24 +86,28 @@ app.MapGet("/getWeatherForecastByCity", () =>
                 .Select(_ => new WeatherInCity()
                 {
                     WeatherDatumDate = DateTime.Today
-                        .AddDays(Random.Shared.Next(-2, 5))
+                        .AddDays(Random.Shared.Next(-2,5))
                         .ToDateOnly(),
                     WeatherDescription = weatherDescriptions[Random.Shared.Next(weatherDescriptions.Length)],
                     CityName = cityList[Random.Shared.Next(cityList.Length)],
                     MostCommonLanguageSpokenInCity = languagesList[Random.Shared.Next(languagesList.Length)]
                 })
-                // treat each city-date combo as a distinct 'key'
-                .DistinctBy(datum => new { datum.CityName, datum.WeatherDatumDate })
+                // treat each city-date combo as a distinct 'key' to get distinct objects for.
+                // test 1 1 2 3
                 .ToArray();
-        
-        var response = new WeatherInCitySanitizedResponse
+
+        // Format the raw response to the response model.
+        // Total data counts are returned as part of the new release model.
+        return new WeatherInCityResponseModel
         {
             WeatherDataOrderedByDate = rawResponse
-                .OrderBy(datum => datum.WeatherDatumDate)
+                .GroupBy(datum => datum.WeatherDatumDate)
+                .SelectMany(datum => datum)
+                .DistinctBy(datum => datum.WeatherDatumDate)
+                .OrderByDescending(datum => datum.WeatherDatumDate)
                 .ThenBy(datum => datum.CityName)
+                .AsEnumerable()
         };
-
-        return response;
     })
     .WithName("GetMostCommonLanguageByCity");
 
