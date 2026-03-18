@@ -64,9 +64,9 @@ app.MapPost("/mostCommonLanguageInCity", () =>
             .ToArray();
         
         // returning a response object, with the distinct cities and a summary line.
-        var respRaw = new MostCommonLanguageResponse(languagesMostCommonlySpokenInCity);
+        var responseRaw = new MostCommonLanguageResponse(languagesMostCommonlySpokenInCity);
 
-        var response = respRaw.OrderByCityNameAlphabetically(respRaw);
+        var response = responseRaw.OrderByCityNameAlphabetically(responseRaw);
 
         return response;
     })
@@ -93,7 +93,6 @@ app.MapGet("/getWeatherForecastByCity", () =>
                     MostCommonLanguageSpokenInCity = languagesList[Random.Shared.Next(languagesList.Length)]
                 })
                 // treat each city-date combo as a distinct 'key' to get distinct objects for.
-                // test 1 1 2 3
                 .ToArray();
 
         // Format the raw response to the response model.

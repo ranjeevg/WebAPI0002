@@ -48,9 +48,14 @@ public record MostCommonLanguageResponse(IEnumerable<MostCommonLanguageInCity> C
     /// <param name="source"></param>
     /// <returns></returns>
     public MostCommonLanguageResponse OrderByCityNameAlphabetically(MostCommonLanguageResponse source) => 
-        new MostCommonLanguageResponse(CityData.OrderBy(datum => datum.City));
+        new (CityData.OrderBy(datum => datum.City));
 }
 
+/// <summary>
+/// A raw data model for the meather in city API calls.
+/// <br /><br />
+/// (The APIs return IEnumerables of these.)
+/// </summary>
 public record WeatherInCity
 {
     public DateOnly WeatherDatumDate { get; init; } 

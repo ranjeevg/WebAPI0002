@@ -1,10 +1,9 @@
 namespace WebApi0002.Helpers_and_Enums;
 
-/// <summary>
-/// 
-/// </summary>
 public static class AppConstants
 {
+    // TODO: Convert these lists into DB-persisted data.
+    
     /// <summary>
     /// Dummy data sources for the test APIs being called.
     /// </summary>
@@ -78,6 +77,17 @@ public static class AppConstants
             "Humid",
             "Balmy",
             "Brisk",
+            "Blistering",
+            "Crisp",
+            "Fresh",
+            "Torrential rainfall",
+            "Heatwave",
+            "Icy",
+            "Snowing",
+            "Blizzard",
+            "Hail",
+            "Arctic winds",
+            "Temperate",
             "Judeccan"
         ];
     }

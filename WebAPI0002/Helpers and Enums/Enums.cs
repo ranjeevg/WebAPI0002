@@ -10,7 +10,7 @@ public static class Enums
     /// </summary>
     public enum OrderingType
     {
-        ByObjectNameLiteral,
+        ByStringLiteralValue,
         /// <summary>
         /// .NET 10 just introduced the .DistinctBy() LINQ method, as a reference.
         /// </summary>
