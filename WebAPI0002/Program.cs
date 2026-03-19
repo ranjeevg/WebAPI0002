@@ -32,13 +32,16 @@ app.MapGet("/weatherForecast", () =>
                 Random.Shared.Next(-20, 55),
                 AppConstants.ApiLists.TemperatureDescriptions[Random.Shared.Next(AppConstants.ApiLists.TemperatureDescriptions.Length)]
             ))
-        .ToArray();
+        .ToArray()
+        ?? [];
         
         // removing duplicate dates
         // (redundant in this method, present as an example only)
         forecast = forecast
             .DistinctBy(datum => datum.Date)
-            .ToArray();
+            .ToArray()
+            ??
+            [];
         
         return forecast;
     })
@@ -53,8 +56,10 @@ app.MapPost("/mostCommonLanguageInCity", () =>
             Enumerable.Range(1, 250)
             .Select(_ => new MostCommonLanguageInCity
             (
-                AppConstants.ApiLists.Cities[Random.Shared.Next(AppConstants.ApiLists.Cities.Length)],
-                AppConstants.ApiLists.Languages[Random.Shared.Next(AppConstants.ApiLists.Languages.Length)]
+                City: 
+                    AppConstants.ApiLists.Cities[Random.Shared.Next(AppConstants.ApiLists.Cities.Length)],
+                MostCommonLanguage: 
+                    AppConstants.ApiLists.Languages[Random.Shared.Next(AppConstants.ApiLists.Languages.Length)]
             ))
             .ToArray()
             ??
