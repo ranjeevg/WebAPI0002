@@ -3,7 +3,6 @@ namespace WebApi0002.Helpers_and_Enums;
 public static class AppConstants
 {
     // TODO: Convert these lists into DB-persisted data.
-    
     /// <summary>
     /// Dummy data sources for the test APIs being called.
     /// </summary>
@@ -17,21 +16,21 @@ public static class AppConstants
         /// </i>
         /// </summary>
         public static string[] Languages =>
-        [   
-            "English", 
-            "Tamil", 
-            "Hindi", 
-            "French", 
-            "Spanish", 
-            "Mandarin", 
-            "Japanese", 
-            "Punjabi", 
-            "Urdu", 
-            "Sinhala", 
-            "Danish", 
-            "Norwegian", 
-            "Swedish", 
-            "Finnish", 
+        [
+            "English",
+            "Tamil",
+            "Hindi",
+            "French",
+            "Spanish",
+            "Mandarin",
+            "Japanese",
+            "Punjabi",
+            "Urdu",
+            "Sinhala",
+            "Danish",
+            "Norwegian",
+            "Swedish",
+            "Finnish",
             "Igbo",
             "Tagalog",
             "Dene",
@@ -40,20 +39,20 @@ public static class AppConstants
             "Ukrainian",
             "Sanskrit"
         ];
-        
+
         /// <summary>
         /// A dummy list of cities.
         /// </summary>
         public static string[] Cities =>
         [
-            "Vancouver", 
-            "Surrey", 
-            "Toronto", 
-            "Bangalore", 
-            "Delhi", 
-            "Madrid", 
-            "Rome", 
-            "Bern", 
+            "Vancouver",
+            "Surrey",
+            "Toronto",
+            "Bangalore",
+            "Delhi",
+            "Madrid",
+            "Rome",
+            "Bern",
             "Trondheim",
             "Calgary",
             "Edmonton",
@@ -61,12 +60,12 @@ public static class AppConstants
             "Chennai",
             "Montreal",
             "Hyderabad",
-            "Udupi", 
+            "Udupi",
             "Havana",
             "New York City",
             "Varanasi"
         ];
-        
+
         /// <summary>
         /// A... whimsical... array of adjectives to describe the weather.
         /// </summary>
