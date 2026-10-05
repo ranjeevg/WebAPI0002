@@ -1,3 +1,8 @@
+using System;
+using System.Linq;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using WebAPI0002.Extensions;
 using WebApi0002.Helpers_and_Enums;
 using WebApi0002.Models;
@@ -15,6 +20,7 @@ builder.Services.AddScoped<ActualWeatherApiCallsService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 

@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System;
+using static System.DateTime;
+
 namespace WebAPI0002.Extensions;
 
 public static class Extensions
@@ -32,7 +36,7 @@ public static class Extensions
     public static DateTime GetMondayOfWeek(this DateTime dateTime)
     {
         int difference;
-        
+
         // Given that same isomorphism, Monday maps over to 1. 
         // Letting the current day of the week be represented by d, and x represent the number of days to be added / subtracted to get that date,
         // it follows that
@@ -75,10 +79,10 @@ public static class Extensions
 
         return dateTime.SubtractDays(difference);
     }
-    
+
     /// <summary>
     /// This might already be an existing functionality, but adding this method for ease of use.
     /// </summary>
     public static DateOnly ToDateOnly(this DateTime date)
-        => new (date.Year, date.Month, date.Day);
+        => new(date.Year, date.Month, date.Day);
 }

@@ -1,3 +1,5 @@
+using System;
+
 namespace WebApi0002.Helpers_and_Enums;
 
 public static class AppConstants
@@ -85,12 +87,12 @@ public static class AppConstants
             "Snowing",
             "Blizzard",
             "Hail",
-            "Arctic winds",
+            "Polar",
             "Temperate",
             "Judeccan"
         ];
     }
-    
+
     /// <summary>
     /// Miscellaneous values (table names and the like)
     /// </summary>
