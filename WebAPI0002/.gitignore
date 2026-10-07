@@ -1,4 +1,4 @@
 .editorconfig
 bin/
 obj/
-
+global.json

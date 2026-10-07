@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,37 +30,37 @@ app.UseHttpsRedirection();
 #region API methods
 
 // the default 'get' API that came with the template
-app.MapGet("/weatherForecast", () =>
+app.MapGet("/getWeatherForecast", () =>
     {
-        var forecast = Enumerable.Range(1, AppConstants.MiscConstants.TheAnswerToLifeTheUniverseAndEverything).Select(index =>
-            new WeatherForecast
-            (
-                DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                Random.Shared.Next(-20, 55),
-                AppConstants.ApiLists.TemperatureDescriptions[Random.Shared.Next(AppConstants.ApiLists.TemperatureDescriptions.Length)]
-            ))
-        .ToArray()
+        var forecast = Enumerable.Range(1, AppConstants.MiscConstants.TheAnswerToLifeTheUniverseAndEverything)
+            .Select(index =>
+                new WeatherForecast
+                (
+                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                    Random.Shared.Next(-20, 55),
+                    AppConstants.ApiLists.TemperatureDescriptions[Random.Shared.Next(AppConstants.ApiLists.TemperatureDescriptions.Length)]
+                ))
+            .AsEnumerable()
+            .Where(datum => datum.Date <= DateTime.Today.AddMonths(1).ToDateOnly())
         ?? [];
-        
+           
         // removing duplicate dates
         // (redundant in this method, present as an example only)
         forecast = forecast
             .DistinctBy(datum => datum.Date)
-            .ToArray()
-            ??
-            [];
-        
-        return forecast;
+            ?? [];
+
+        return new WeatherResponseModel(forecast);
     })
-    .WithName("GetWeatherForecast");
+    .WithName("getWeatherForecast");
 
 // A sample POST API call, modelled after the sample 'get' API above
-app.MapPost("/mostCommonLanguageInCity", () =>
+app.MapPost("/postMostCommonLanguageInCity", () =>
     {
         // declaring an array of 'most common language spoken in the city' results to be returned
         var languagesMostCommonlySpokenInCity = 
             // did not know about this feature for enumerating over a set index
-            Enumerable.Range(1, 250)
+            Enumerable.Range(1, AppConstants.MiscConstants.TheAnswerToLifeTheUniverseAndEverything)
             .Select(_ => new MostCommonLanguageInCity
             (
                 City: 
@@ -85,7 +86,7 @@ app.MapPost("/mostCommonLanguageInCity", () =>
 
         return response;
     })
-    .WithName("PostMostCommonLanguageInCity");
+    .WithName("postMostCommonLanguageInCity");
 
 // a sample GET method predicting the 'current weather' for a predetermined list of cities.
 app.MapGet("/getWeatherForecastByCity", () =>
@@ -101,7 +102,7 @@ app.MapGet("/getWeatherForecastByCity", () =>
                 .Select(_ => new WeatherInCity()
                 {
                     WeatherDatumDate = DateTime.Today
-                        .AddDays(Random.Shared.Next(-2,5))
+                        .AddDays(Random.Shared.Next(-2,AppConstants.MiscConstants.TheAnswerToLifeTheUniverseAndEverything))
                         .ToDateOnly(),
                     WeatherDescription = weatherDescriptions[Random.Shared.Next(weatherDescriptions.Length)],
                     CityName = cityList[Random.Shared.Next(cityList.Length)],
@@ -128,7 +129,7 @@ app.MapGet("/getWeatherForecastByCity", () =>
                 []
         };
     })
-    .WithName("GetMostCommonLanguageByCity");
+    .WithName("getMostCommonLanguageByCity");
 
 #endregion
 

@@ -73,6 +73,22 @@ public record WeatherInCity
         = "(not available)";
 }
 
+public sealed record WeatherResponseModel
+{
+    public WeatherResponseModel(IEnumerable<WeatherForecast> data)
+    {
+        WeatherData = data;
+    }
+    private IEnumerable<WeatherForecast> WeatherData { get; init; }
+        = [];
+
+    public IEnumerable<WeatherForecast> WeatherForecasts
+        => [.. WeatherData];
+
+    public int Total 
+        => WeatherData.Count();
+}
+
 public record WeatherInCityResponseModel
 {
     public IEnumerable<WeatherInCity> WeatherDataOrderedByDate { get; init; }
