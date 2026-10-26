@@ -22,3 +22,6 @@
 /WebAPI0002/obj
 /.vscode/
 /.idea/
+localhost.crt
+*.crt
+*.pem

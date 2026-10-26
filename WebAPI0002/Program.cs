@@ -26,6 +26,9 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 
 app.UseHttpsRedirection();
+app.UseHsts();
+
+// 
 
 #region API methods
 
@@ -43,7 +46,7 @@ app.MapGet("/getWeatherForecast", () =>
             .AsEnumerable()
             .Where(datum => datum.Date <= DateTime.Today.AddMonths(1).ToDateOnly())
         ?? [];
-           
+
         // removing duplicate dates
         // (redundant in this method, present as an example only)
         forecast = forecast
@@ -65,20 +68,20 @@ app.MapPost("/postMostCommonLanguageInCity", () =>
             (
                 City: 
                     AppConstants.ApiLists.Cities[Random.Shared.Next(AppConstants.ApiLists.Cities.Length)],
-                MostCommonLanguage: 
+                MostCommonLanguage:
                     AppConstants.ApiLists.Languages[Random.Shared.Next(AppConstants.ApiLists.Languages.Length)]
             ))
             .ToArray()
             ??
             [];
-        
+
         // removing duplicates by city
         languagesMostCommonlySpokenInCity = languagesMostCommonlySpokenInCity
             .DistinctBy(datum => datum.City)
             .ToArray()
-            ?? 
+            ??
             [];
-        
+
         // returning a response object, with the distinct cities and a summary line.
         var responseRaw = new MostCommonLanguageResponse(languagesMostCommonlySpokenInCity);
 
